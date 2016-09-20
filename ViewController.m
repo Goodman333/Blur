@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "BlurView.h"
+#import "UIImageEffects.h"
 
 @interface ViewController ()
 
@@ -45,10 +46,18 @@
         _blurView = [[BlurView alloc]initWithFrame:self.view.bounds blurStyle:BlurStyleGPUImage backgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
         [self.view addSubview:_blurView];
     }];
+    UIAlertAction *blurAppleAction = [UIAlertAction actionWithTitle:@"Apple" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (_blurView) {
+            [_blurView removeFromSuperview];
+        }
+        _blurView = [[BlurView alloc]initWithFrame:self.view.bounds blurStyle:BlurStyleApple backgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
+        [self.view addSubview:_blurView];
+    }];
 
     [blurAlert addAction:cancelAction];
     [blurAlert addAction:blurEffectAction];
     [blurAlert addAction:blurGPUImageAction];
+    [blurAlert addAction:blurAppleAction];
     [blurAlert addAction:clearAction];
     
     [self presentViewController:blurAlert animated:YES completion:nil];

@@ -7,6 +7,16 @@
 //
 
 #import "BlurView.h"
+#import "UIImageEffects.h"
+
+#import <mach/mach.h>
+#import <mach/mach_time.h>
+
+@interface BlurView ()
+
+@property (strong, nonatomic) CALayer *blurLayer;
+
+@end
 
 @implementation BlurView
 
@@ -45,6 +55,26 @@
         GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
         GPUImageView *filterView = (GPUImageView *)self;
         [blurFilter addTarget:filterView];
+    }else if (blurStyle == BlurStyleApple) {
+        self.blurLayer = [CALayer layer];
+        self.blurLayer.frame = self.bounds;
+        [self.layer addSublayer:self.blurLayer];
+        
+        float scale = [UIScreen mainScreen].scale;
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, YES, scale);
+        [self drawViewHierarchyInRect:self.frame afterScreenUpdates:NO];
+        __block UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage,
+                                                           CGRectMake(self.blurLayer.frame.origin.x * scale,
+                                                                      self.blurLayer.frame.origin.y * scale,
+                                                                      self.blurLayer.frame.size.width * scale,
+                                                                      self.blurLayer.frame.size.height * scale));
+        image = [UIImage imageWithCGImage:imageRef];
+        image = [UIImageEffects imageByApplyingLightEffectToImage:nil];
+        
+        self.blurLayer.contents = (__bridge id)(image.CGImage);
     }
 }
 

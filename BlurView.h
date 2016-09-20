@@ -12,6 +12,7 @@
 typedef NS_ENUM(NSInteger, BlurStyle) {
     BlurStyleUIBlurEffect,
     BlurStyleGPUImage,
+    BlurStyleApple,
 };
 
 @interface BlurView : GPUImageView
