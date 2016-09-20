@@ -9,9 +9,6 @@
 #import "BlurView.h"
 #import "UIImageEffects.h"
 
-#import <mach/mach.h>
-#import <mach/mach_time.h>
-
 @interface BlurView ()
 
 @property (strong, nonatomic) CALayer *blurLayer;
