@@ -6,3 +6,5 @@
 ![image](https://github.com/Goodman333/Blur/blob/master/Image/UIBlurEffect.png)
 ###使用GPUImage
 ![image](https://github.com/Goodman333/Blur/blob/master/Image/GPUImage.png)
+###使用苹果官方Demo
+![image](https://github.com/Goodman333/Blur/blob/master/Image/Apple.png)
