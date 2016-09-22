@@ -40,7 +40,7 @@
             [self addSubview:BlurView];
             [self sendSubviewToBack:BlurView];
             
-        }else if([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0f){
+        }else {
             
             UIToolbar *BlurView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
             ((UIToolbar *)BlurView).barStyle = UIBarStyleBlack;
